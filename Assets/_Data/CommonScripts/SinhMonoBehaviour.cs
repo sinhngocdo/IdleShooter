@@ -1,41 +1,43 @@
-using System;
 using UnityEngine;
 
-public class SinhMonoBehaviour : MonoBehaviour
+namespace _Data.CommonScripts
 {
-    protected virtual void Awake()
+    public class SinhMonoBehaviour : MonoBehaviour
     {
-        this.LoadComponents();
-    }
+        protected virtual void Awake()
+        {
+            this.LoadComponents();
+        }
     
-    protected virtual void Start()
-    {
-        //for override
-    }
+        protected virtual void Start()
+        {
+            //for override
+        }
     
-    protected virtual void OnEnable()
-    {
-        //for override
-    }
+        protected virtual void OnEnable()
+        {
+            //for override
+        }
     
-    protected virtual void OnDisable()
-    {
-        //for override
-    }
+        protected virtual void OnDisable()
+        {
+            //for override
+        }
     
-    protected virtual void Reset()
-    {
-        this.LoadComponents();
-        this.ResetValue();
-    }
+        protected virtual void Reset()
+        {
+            this.LoadComponents();
+            this.ResetValue();
+        }
     
-    protected virtual void LoadComponents()
-    {
-        //for overriding   
-    }
+        protected virtual void LoadComponents()
+        {
+            //for overriding   
+        }
     
-    protected virtual void ResetValue()
-    {
-        //for overriding
+        protected virtual void ResetValue()
+        {
+            //for overriding
+        }
     }
 }

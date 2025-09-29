@@ -1,37 +1,40 @@
 using UnityEngine;
 
-public abstract class SinhSingleton<T> : SinhMonoBehaviour where T : SinhMonoBehaviour
+namespace _Data.CommonScripts
 {
-    private static T _instance;
-
-    public static T Instance
+    public abstract class SinhSingleton<T> : SinhMonoBehaviour where T : SinhMonoBehaviour
     {
-        get
+        private static T _instance;
+
+        public static T Instance
         {
-            if(_instance == null) Debug.LogError("Singleton instance has not been created yet!");
-            return _instance;
+            get
+            {
+                if(_instance == null) Debug.LogError("Singleton instance has not been created yet!");
+                return _instance;
+            }
         }
-    }
 
-    protected override void Awake()
-    {
-        base.Awake();
-        this.LoadInstance();
-    }
-
-    public static bool HasInstance()
-    {
-        return _instance != null;
-    }
-
-    protected virtual void LoadInstance()
-    {
-        if (_instance == null)
+        protected override void Awake()
         {
-            _instance = this as T;
-            if(transform.parent == null) DontDestroyOnLoad(this.gameObject);
-            return;
+            base.Awake();
+            this.LoadInstance();
         }
-        if(_instance != this) Debug.LogError("Singleton instance has not been created yet!");
+
+        public static bool HasInstance()
+        {
+            return _instance != null;
+        }
+
+        protected virtual void LoadInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = this as T;
+                if(transform.parent == null) DontDestroyOnLoad(this.gameObject);
+                return;
+            }
+            if(_instance != this) Debug.LogError("Singleton instance has not been created yet!");
+        }
     }
 }
