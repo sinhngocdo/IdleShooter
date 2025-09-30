@@ -8,7 +8,7 @@ namespace _Data.Object.Bullet
         [Header("Bullet Abstract")]
         [SerializeField] protected BulletCtrl bulletCtrl;
 
-        public BulletCtrl BulletCtrl { get => bulletCtrl; }
+        public BulletCtrl BulletCtrl => bulletCtrl;
 
         public override string GetName()
         {
