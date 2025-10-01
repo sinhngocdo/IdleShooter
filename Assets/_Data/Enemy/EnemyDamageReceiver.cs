@@ -56,7 +56,9 @@ namespace _Data.Enemy
         {
             base.OnReborn();
             this.capsuleCollider.enabled = true;
+            this.enemyCtrl?.Enemy?.SetEnemyState(CharacterState.Ready);
             this.enemyCtrl?.EnemyMoving?.SetCanMove(true);
+            Debug.Log(transform.name + ": OnReborn", gameObject);
         }
     }
 }

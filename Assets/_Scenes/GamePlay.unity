@@ -704,6 +704,7 @@ GameObject:
   - component: {fileID: 566502520}
   - component: {fileID: 566502522}
   - component: {fileID: 566502521}
+  - component: {fileID: 566502523}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -760,6 +761,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 1670460626}
   enemyCtrl: {fileID: 566502521}
+  lastState: 1
+--- !u!50 &566502523
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566502519}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &645451657
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,7 +949,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 754460650}
-  - component: {fileID: 754460652}
   - component: {fileID: 754460651}
   m_Layer: 0
   m_Name: EnemyMoving
@@ -957,39 +985,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCtrl: {fileID: 566502521}
-  rigid2D: {fileID: 754460652}
+  rigid2D: {fileID: 566502523}
   target: {fileID: 2034080932}
-  stopDistance: 2
+  stopDistance: 5
   moveSpeed: 1
   canMove: 1
   isMoving: 0
---- !u!50 &754460652
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754460649}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  distance: 0
 --- !u!1 &813402181
 GameObject:
   m_ObjectHideFlags: 0
@@ -2305,6 +2307,10 @@ PrefabInstance:
     - target: {fileID: 3708131152907270737, guid: 1b1a1b5ce57755b4e8f1959a2d7fd1e4, type: 3}
       propertyPath: m_Name
       value: Goblin_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8720096957419237582, guid: 1b1a1b5ce57755b4e8f1959a2d7fd1e4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8856888757531811715, guid: 1b1a1b5ce57755b4e8f1959a2d7fd1e4, type: 3}
       propertyPath: m_LocalPosition.x

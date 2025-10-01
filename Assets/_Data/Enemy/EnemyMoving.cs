@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace _Data.Enemy
 {
-    [RequireComponent(typeof(Rigidbody2D))]
     public class EnemyMoving : SinhMonoBehaviour
     {
         [Header("References")]
@@ -19,6 +18,7 @@ namespace _Data.Enemy
         
         [Header("Runtime")]
         [SerializeField] protected bool isMoving = false;
+        [SerializeField] protected float distance = 0f;
         
         
         
@@ -39,7 +39,8 @@ namespace _Data.Enemy
         protected virtual void LoadRigid2D()
         {
             if (this.rigid2D != null) return;
-            this.rigid2D = this.GetComponent<Rigidbody2D>();
+            this.rigid2D = this.GetComponentInParent<Rigidbody2D>();
+            this.rigid2D.gravityScale = 0;
             this.rigid2D.constraints = RigidbodyConstraints2D.FreezeRotation;
             Debug.Log(transform.name + ": LoadRigid2D", gameObject);       
         }
@@ -62,13 +63,17 @@ namespace _Data.Enemy
         {
             if (!this.canMove)
             {
+                this.StopMoving();
                 return;
             }
 
             if (this.CheckDistance())
             {
+                this.StopMoving();
+                this.enemyCtrl.Enemy.SetEnemyState(CharacterState.Ready);
                 return;
             }
+
             this.rigid2D.velocity = new Vector2(-moveSpeed, this.rigid2D.velocity.y);
             this.enemyCtrl.Enemy.SetEnemyState(CharacterState.Walk);
         }
@@ -79,22 +84,24 @@ namespace _Data.Enemy
 
         protected virtual bool CheckDistance()
         {
-            float distance = Mathf.Abs(Vector2.Distance(this.transform.position, this.target.position));
-            if (distance <= this.stopDistance)
+            this.distance = Mathf.Abs(Vector2.Distance(this.transform.position, this.target.position));
+            if (this.distance <= this.stopDistance)
             {
                 return true;
             }
             return false;
         }
 
-        protected virtual void SetState(CharacterState state)
+        protected virtual void StopMoving()
         {
-            this.enemyCtrl.Enemy.SetEnemyState(state);
+            if (Mathf.Abs(this.rigid2D.velocity.x) > 0.0001f)
+                this.rigid2D.velocity = new Vector2(0f, this.rigid2D.velocity.y);
         }
 
         public virtual void SetCanMove(bool isCanMove)
         {
             this.canMove = isCanMove;
+            if(!this.canMove) this.StopMoving();
         }
         
     }
