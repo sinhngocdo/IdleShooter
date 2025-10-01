@@ -7,7 +7,7 @@ namespace _Data.Enemy.EnemyManager
     {
         [SerializeField] protected int maxSpawn = 10;
         [SerializeField] protected float spawnSpeed = 1f;
-        protected List<EnemyCtrl> spawnedEnemies = new();
+        [SerializeField] protected List<EnemyCtrl> spawnedEnemies = new();
         
         protected override void Start()
         {
@@ -20,7 +20,7 @@ namespace _Data.Enemy.EnemyManager
         {
             Invoke(nameof(this.Spawning),this.spawnSpeed);
             this.RemoveDeadOne();
-            if (this.spawnedEnemies.Count > this.maxSpawn) return;
+            if (this.spawnedEnemies.Count >= this.maxSpawn) return;
             EnemyCtrl prefab = this.GetEnemyPrefab();
           
             EnemyCtrl newEnemy = this.enemyManager.EnemySpawner.Spawn(prefab, transform.position);

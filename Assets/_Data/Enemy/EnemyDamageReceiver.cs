@@ -1,4 +1,5 @@
 using _Data.Damage;
+using Assets.HeroEditor4D.Common.Scripts.Enums;
 using UnityEngine;
 
 namespace _Data.Enemy
@@ -8,6 +9,9 @@ namespace _Data.Enemy
     {
         [SerializeField] protected CapsuleCollider capsuleCollider;
         [SerializeField] protected EnemyCtrl enemyCtrl;
+        
+        [Header("Despawn")]
+        [SerializeField] protected float timeToDespawn = 1f;
 
         protected override void LoadComponents()
         {
@@ -32,6 +36,27 @@ namespace _Data.Enemy
             if (this.enemyCtrl != null) return;
             this.enemyCtrl = this.GetComponentInParent<EnemyCtrl>();
             Debug.Log(transform.name + "LoadEnemyCtrl", gameObject);
+        }
+
+        protected override void OnDead()
+        {
+            base.OnDead();
+            this.enemyCtrl?.Enemy?.SetEnemyState(CharacterState.Death);
+            this.capsuleCollider.enabled = false;
+            this.enemyCtrl?.EnemyMoving?.SetCanMove(false);
+            Invoke(nameof(this.Dissapear), this.timeToDespawn);
+        }
+
+        protected virtual void Dissapear()
+        {
+            this.enemyCtrl.Despawn.DoDespawn();
+        }
+
+        protected override void OnReborn()
+        {
+            base.OnReborn();
+            this.capsuleCollider.enabled = true;
+            this.enemyCtrl?.EnemyMoving?.SetCanMove(true);
         }
     }
 }

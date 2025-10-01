@@ -13,6 +13,8 @@ namespace _Data.Enemy
         [Header("Enemy Abstract")]
         [SerializeField] protected EnemyCtrl enemyCtrl;
         public EnemyCtrl EnemyCtrl => this.enemyCtrl;
+        
+        private CharacterState lastState = CharacterState.Ready;
 
         protected override void OnEnable()
         {
@@ -43,6 +45,7 @@ namespace _Data.Enemy
 
         public virtual void SetEnemyState(CharacterState state)
         {
+            if (this.lastState == state) return;
             this.character.AnimationManager.SetState(state);
         }
     }

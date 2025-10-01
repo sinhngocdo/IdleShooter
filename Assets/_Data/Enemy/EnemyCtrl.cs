@@ -13,6 +13,9 @@ namespace _Data.Enemy
         [SerializeField] protected EnemyDamageReceiver enemyDamageReceiver;
         public EnemyDamageReceiver EnemyDamageReceiver => this.enemyDamageReceiver;
 
+        [SerializeField] protected EnemyMoving enemyMoving;
+        public EnemyMoving EnemyMoving => this.enemyMoving;
+
         public override string GetName()
         {
             return "Enemy_1";
@@ -23,6 +26,7 @@ namespace _Data.Enemy
             base.LoadComponents();
             this.LoadEnemy();
             this.LoadDamageReceiver();
+            this.LoadEnemyMoving();
         }
     
         protected virtual void LoadEnemy()
@@ -37,6 +41,13 @@ namespace _Data.Enemy
             if (this.enemyDamageReceiver != null) return;
             this.enemyDamageReceiver = transform.GetComponentInChildren<EnemyDamageReceiver>();
             Debug.Log(transform.name + ": LoadDamageReceiver", gameObject);
+        }
+
+        protected virtual void LoadEnemyMoving()
+        {
+            if (this.enemyMoving != null) return;
+            this.enemyMoving = transform.GetComponentInChildren<EnemyMoving>();
+            Debug.Log(transform.name + ": LoadEnemyMoving", gameObject);
         }
     }
 }
