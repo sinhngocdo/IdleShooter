@@ -1,6 +1,7 @@
 using System.Linq;
 using _Data.CommonScripts;
 using _Data.Object.Bullet;
+using _Data.Spawner;
 using Assets.HeroEditor4D.Common.Scripts.CharacterScripts;
 using Assets.HeroEditor4D.Common.Scripts.Data;
 using Assets.HeroEditor4D.Common.Scripts.Enums;

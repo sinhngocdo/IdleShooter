@@ -1,3 +1,4 @@
+using _Data.Damage;
 using UnityEngine;
 
 namespace _Data.Object.Bullet
