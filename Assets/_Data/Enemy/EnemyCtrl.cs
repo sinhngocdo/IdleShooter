@@ -1,5 +1,3 @@
-using _Data.CommonScripts;
-using _Data.Object.Bullet;
 using _Data.Spawner;
 using UnityEngine;
 

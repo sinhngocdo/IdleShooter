@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace _Data.Inventory.Item
 {
+    [Serializable]
     public class ItemInventory
     {
         protected int itemId;

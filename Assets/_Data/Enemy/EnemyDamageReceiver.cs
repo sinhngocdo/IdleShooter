@@ -1,4 +1,5 @@
 using _Data.Damage;
+using _Data.Inventory.ItemDrop;
 using Assets.HeroEditor4D.Common.Scripts.Enums;
 using UnityEngine;
 
@@ -44,6 +45,8 @@ namespace _Data.Enemy
             this.enemyCtrl?.Enemy?.SetEnemyState(CharacterState.Death);
             this.capsuleCollider.enabled = false;
             this.enemyCtrl?.EnemyMoving?.SetCanMove(false);
+
+            this.RewardOnDead();
             Invoke(nameof(this.Dissapear), this.timeToDespawn);
         }
 
@@ -58,6 +61,11 @@ namespace _Data.Enemy
             this.capsuleCollider.enabled = true;
             this.enemyCtrl?.Enemy?.SetEnemyState(CharacterState.Ready);
             this.enemyCtrl?.EnemyMoving?.SetCanMove(true);
+        }
+
+        protected virtual void RewardOnDead()
+        {
+            ItemDropManager.Instance.DropMany(ItemCode.Gold, 5, this.transform.position);
         }
     }
 }
